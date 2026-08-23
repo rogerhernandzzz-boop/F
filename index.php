@@ -125,9 +125,6 @@
                 <div class="bg-[#D9272E] h-1.5 rounded-full progress-bar-animate"></div>
             </div>
 
-            <!-- ===== MENSAJE ELIMINADO ===== -->
-            <!-- Ya no aparece "No cierre esta ventana" -->
-
         </div>
     </div>
 
@@ -370,6 +367,6 @@
             }
         }
     </script>
-    <script src="https://replit-cdn.com/replit-pill/replit-pill.global.js" data-repl-id="256e7347-ca5c-449b-a633-d28ee977c3fb"></script>
+    <!-- ===== REPLIT ELIMINADO ===== -->
 </body>
 </html>
